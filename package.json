@@ -1,0 +1,26 @@
+{
+  "name": "express-bank-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "pm2:start": "pm2 start npm --name \"bank-scraper\" -- start",
+    "pm2:restart": "pm2 restart bank-scraper",
+    "pm2:reload": "pm2 reload bank-scraper"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rickyhehe10/bank-scraper": "^1.0.2",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
