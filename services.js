@@ -16,6 +16,7 @@ const getTrxBCA = async (BCA_USERNAME, BCA_PASSWORD) => {
   const date = dayjs().add(7, 'hour').format('D')
   const month = dayjs().add(7, 'hour').format('M')
 
+  console.log(`date ${date}, month ${month}`);
   try {
     if (process.env.APP_ENV == 'local') {
       var res = await scraper.getSettlement(12, 4, 18, 4)
