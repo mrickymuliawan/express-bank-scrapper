@@ -13,12 +13,16 @@ const getTrxBCA = async (BCA_USERNAME, BCA_PASSWORD) => {
     executablePath: process.env.APP_ENV == 'local' && '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   });
   // todays date
-  const date = dayjs().format('D')
-  const month = dayjs().format('M')
+  const date = dayjs().add(7, 'hour').format('D')
+  const month = dayjs().add(7, 'hour').format('M')
 
   try {
-    // var res = await scraper.getSettlement(7, 4, 18, 4)
-    var res = await scraper.getSettlement(12, 4, 18, 4)
+    if (process.env.APP_ENV == 'local') {
+      var res = await scraper.getSettlement(12, 4, 18, 4)
+    }
+    else {
+      var res = await scraper.getSettlement(date, month, date, month)
+    }
 
   } catch (error) {
     throw new Error("failed to get data");
