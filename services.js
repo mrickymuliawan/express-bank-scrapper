@@ -16,20 +16,14 @@ const getTrxBCA = async (BCA_USERNAME, BCA_PASSWORD) => {
   const date = dayjs().add(7, 'hour').format('D')
   const month = dayjs().add(7, 'hour').format('M')
 
-  console.log(`date ${date}, month ${month}`);
+  console.log(`Run at ${dayjs().format('DD/MM/YY, HH:mm')} - params: date ${date}, month ${month}`);
   try {
-    if (process.env.APP_ENV == 'local') {
-      var res = await scraper.getSettlement(12, 4, 18, 4)
-    }
-    else {
-      var res = await scraper.getSettlement(date, month, date, month)
-    }
-
+    var res = await scraper.getSettlement(date, month, date, month)
   } catch (error) {
     throw new Error("failed to get data");
   }
 
-  const mapped = res.filter(i => i.mutasi == 'CR').map(i => ({ amount: parseInt(i.nominal.substring(0, i.nominal.length - 3).replace(',', '')) }))
+  const mapped = res.filter(i => i.mutasi == 'CR').map(i => ({ amount: parseInt(i.nominal.substring(0, i.nominal.length - 3).replaceAll(',', '')) }))
 
 
   return mapped
