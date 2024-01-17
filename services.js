@@ -18,7 +18,7 @@ const getTrxBCA = async (BCA_USERNAME, BCA_PASSWORD) => {
 
   console.log(`Run at ${dayjs().format('DD/MM/YY, HH:mm')} - params: date ${date}, month ${month}`);
   try {
-    var res = await scraper.getSettlement(11, month, date, month)
+    var res = await scraper.getSettlement(date, month, date, month)
   } catch (error) {
     throw new Error("failed to get data");
   }
