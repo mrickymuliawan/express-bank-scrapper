@@ -18,12 +18,18 @@ const getTrxBCA = async (BCA_USERNAME, BCA_PASSWORD) => {
 
   console.log(`Run at ${dayjs().format('DD/MM/YY, HH:mm')} - params: date ${date}, month ${month}`);
   try {
-    var res = await scraper.getSettlement(date, month, date, month)
+    var res = await scraper.getSettlement(11, month, date, month)
   } catch (error) {
     throw new Error("failed to get data");
   }
 
-  const mapped = res.filter(i => i.mutasi == 'CR').map(i => ({ amount: parseInt(i.nominal.substring(0, i.nominal.length - 3).replaceAll(',', '')) }))
+  const mapped = res.map(i => ({
+    name: i.name,
+    type: i.mutasi,
+    date: i.tanggal,
+    amount: parseInt(i.nominal.substring(0, i.nominal.length - 3).replaceAll(',', '')),
+    balance: parseInt(i.saldoakhir.substring(0, i.saldoakhir.length - 3).replaceAll(',', '')),
+  }))
 
 
   return mapped
