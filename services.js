@@ -24,7 +24,7 @@ const getTrxBCA = async (BCA_USERNAME, BCA_PASSWORD) => {
   }
 
   const mapped = res.map(i => ({
-    name: i.name,
+    name: i.keterangan,
     type: i.mutasi,
     date: i.tanggal,
     amount: parseInt(i.nominal.substring(0, i.nominal.length - 3).replaceAll(',', '')),
